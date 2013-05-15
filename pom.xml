@@ -202,8 +202,8 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<scm>
-		<connection>scm:git:git://github.com/NCIP/cagrid2-wsrf.git</connection>
-		<developerConnection>scm:git:git://github.com/NCIP/cagrid2-wsrf.git</developerConnection>
+		<connection>scm:git:git@github.com:NCIP/cagrid2-wsrf.git</connection>
+		<developerConnection>scm:git:git@github.com:NCIP/cagrid2-wsrf.git</developerConnection>
 		<url>https://github.com/NCIP/cagrid2-wsrf</url>
 	</scm>
 	<modules>
