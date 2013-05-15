@@ -177,6 +177,19 @@
 		</repository> <snapshotRepository> <id>CBIIT-Snapshot</id> <name>CBIIT Snapshot 
 		Repository</name> <url>https://ncimvn.nci.nih.gov/nexus/content/repositories/snapshots/</url> 
 		</snapshotRepository> </distributionManagement> -->
+	<!-- TODO: replace this with NCI info once they provide it -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>inventrio-nexus-snapshots</id>
+			<name>Inventrio Nexus Snapshots</name>
+			<url>https://repo.inventrio.com/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>inventrio-nexus-releases</id>
+			<name>Inventrio Release Repository</name>
+			<url>https://repo.inventrio.com/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 	<repositories>
 		<repository>
 			<id>com.springsource.repository.bundles.release</id>
