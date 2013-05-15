@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<features>
+	<feature name="wsrf-draft" version="${project.version}">
+		<bundle>mvn:${project.groupId}/wsrf-jglobus/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/ws-model/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/ws-enumeration-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/ws-trust-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/wsrf-faults-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/wsrf-properties-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/wsrf-lifetime-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/wsrf-notification-api/${project.version}</bundle>
+		<bundle>mvn:${project.groupId}/wsrf-servicegroup-api/${project.version}</bundle>
+	</feature>
+</features>
