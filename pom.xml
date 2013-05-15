@@ -16,6 +16,11 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
@@ -167,18 +172,11 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<!-- <distributionManagement>
-		<repository>
-			<id>CBIIT-Releases</id>
-			<name>CBIIT Release</name>
-			<url>https://ncimvn.nci.nih.gov/nexus/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>CBIIT-Snapshot</id>
-			<name>CBIIT Snapshot Repository</name>
-			<url>https://ncimvn.nci.nih.gov/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement> -->
+	<!-- <distributionManagement> <repository> <id>CBIIT-Releases</id> <name>CBIIT 
+		Release</name> <url>https://ncimvn.nci.nih.gov/nexus/content/repositories/releases/</url> 
+		</repository> <snapshotRepository> <id>CBIIT-Snapshot</id> <name>CBIIT Snapshot 
+		Repository</name> <url>https://ncimvn.nci.nih.gov/nexus/content/repositories/snapshots/</url> 
+		</snapshotRepository> </distributionManagement> -->
 	<repositories>
 		<repository>
 			<id>com.springsource.repository.bundles.release</id>
@@ -203,6 +201,11 @@
 			<url>http://repository.springsource.com/maven/bundles/external</url>
 		</pluginRepository>
 	</pluginRepositories>
+	<scm>
+		<connection>scm:git:git://github.com/NCIP/cagrid2-wsrf.git</connection>
+		<developerConnection>scm:git:git@github.com:NCIP/cagrid2-wsrf.git</developerConnection>
+		<url>https://github.com/NCIP/cagrid2-wsrf</url>
+	</scm>
 	<modules>
 		<module>wsrf-jglobus</module>
 		<module>ws-model</module>
