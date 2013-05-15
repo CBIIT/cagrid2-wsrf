@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.cagrid.wsrf</groupId>
 		<artifactId>wsrf-draft</artifactId>
-		<version>2.0.2-SNAPSHOT</version>
+		<version>2.0.2</version>
 	</parent>
 	<artifactId>wsrf-draft-features</artifactId>
 	<name>WSRF 1.2 Draft Features</name>
