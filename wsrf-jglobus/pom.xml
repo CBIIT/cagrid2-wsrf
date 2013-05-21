@@ -190,8 +190,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk14</artifactId>
-			<version>1.38</version>
+			<artifactId>jce-jdk13</artifactId>
+			<version>1.25</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
