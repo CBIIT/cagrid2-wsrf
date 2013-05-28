@@ -12,10 +12,12 @@ package org.globus.ftp.test;
 
 import java.io.OutputStream;
 import java.io.EOFException;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.globus.ftp.Buffer;
 import org.globus.ftp.OutputStreamDataSource;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -77,9 +79,13 @@ public class OutputStreamDataSourceTest extends TestCase {
 	t.start();
 
 	// give the thread a chance to run
-	Thread.sleep(2000);
+	Thread.sleep(100);
 
 	sr.close();
+
+	// wait until thread has finished
+	t.join(100);
+	Assert.assertFalse("Thread1 should have finished", t.isAlive());
 
 	assertEquals(null, t.getBuffer());
 	assertEquals(null, t.getException());
@@ -89,7 +95,7 @@ public class OutputStreamDataSourceTest extends TestCase {
     class Thread1 extends Thread {
 	
 	private Buffer buf;
-	private Exception exception;
+	private volatile Exception exception;
 	private OutputStreamDataSource sr;
 
 	public Thread1(OutputStreamDataSource sr) {
@@ -121,13 +127,23 @@ public class OutputStreamDataSourceTest extends TestCase {
 	
 	OutputStream out = sr.getOutputStream();
 
-	Thread2 t = new Thread2(out);
+	ReentrantLock lock = new ReentrantLock();
+	
+	Thread2 t = new Thread2(out, lock);
 	t.start();
+	Thread.sleep(10);
 
-	// give the thread a chance to run
-	Thread.sleep(2000);
+	// wait until the first six writes and five flushes are done
+	lock.lock();
+	Thread.sleep(10);
 
+	// close the stream while the thread is blocked in flush
 	sr.close();
+	
+	// wait until thread has finished
+	t.join(100);
+	if (lock.isHeldByCurrentThread()) lock.unlock();
+	Assert.assertFalse("Thread2 should have finished", t.isAlive());
 
 	assertTrue(t.getException1() == null);
 	assertTrue(t.getException2() != null);
@@ -137,11 +153,13 @@ public class OutputStreamDataSourceTest extends TestCase {
 
     class Thread2 extends Thread {
 	
-	private Exception exception1, exception2;
+	private volatile Exception exception1, exception2;
 	private OutputStream sr;
+	private ReentrantLock lock;
 
-	public Thread2(OutputStream sr) {
+	public Thread2(OutputStream sr, ReentrantLock lock) {
 	    this.sr = sr;
+	    this.lock = lock;
 	}
 
 	public Exception getException1() {
@@ -153,6 +171,8 @@ public class OutputStreamDataSourceTest extends TestCase {
 	}
 
 	public void run() {
+	    lock.lock();
+	    try {
 	    try {
 		sr.write(1);
 		sr.flush();
@@ -170,9 +190,13 @@ public class OutputStreamDataSourceTest extends TestCase {
 		return;
 	    }
 	    try {
+	    lock.unlock();
 		sr.flush();
 	    } catch (Exception e) {
 		exception2 = e;
+	    }
+	    } finally {
+	    	if (lock.isHeldByCurrentThread()) lock.unlock();
 	    }
 	}
     }
