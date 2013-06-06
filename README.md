@@ -1,4 +1,4 @@
-Welcome to the caGrid2-wsrf Project!
+Welcome to the caGrid2 WSRF Project!
 =====================================
 
 caGrid is the underlying service-oriented infrastructure that supports the National Cancer Informatics Program (NCIP). 
