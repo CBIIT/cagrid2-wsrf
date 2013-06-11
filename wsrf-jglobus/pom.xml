@@ -70,7 +70,13 @@
 							org.globus.util.debug,
 							org.globus.util.http,
 							org.globus.util.log4j,
-							org.gridforum.jgss
+							org.gridforum.jgss,
+                                                        COM.claymoresystems.cert,
+                                                        COM.claymoresystems.crypto,
+                                                        COM.claymoresystems.provider,
+                                                        COM.claymoresystems.ptls,
+                                                        COM.claymoresystems.sslg,
+                                                        COM.claymoresystems.util
 						</Export-Package>
 						<Import-Package>
 							org.globus.common,
