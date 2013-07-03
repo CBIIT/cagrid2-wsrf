@@ -39,6 +39,7 @@ import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.asn1.x509.X509Extension;
 import org.bouncycastle.asn1.x509.BasicConstraints;
 
+import COM.claymoresystems.ptls.SSLDebug;
 import COM.claymoresystems.sslg.CertVerifyPolicyInt;
 import COM.claymoresystems.cert.X509Cert;
 import COM.claymoresystems.cert.CertContext;
@@ -199,6 +200,10 @@ public class ProxyPathValidator {
 			 CertificateRevocationLists crls)
 	throws ProxyPathValidatorException {
 
+    if (logger.isDebugEnabled()) {
+    	SSLDebug.setDebug(SSLDebug.DEBUG_CERT);
+    }
+
 	if (certPath == null) {
 	    throw new IllegalArgumentException("certs == null");
 	}
@@ -226,6 +231,7 @@ public class ProxyPathValidator {
 		X509Cert.verifyCertChain(context, userCerts, policy);
 	    
 	} catch (COM.claymoresystems.cert.CertificateException e) {
+		logger.debug(ProxyPathValidatorException.FAILURE, e);
 	    throw new ProxyPathValidatorException(
 		  ProxyPathValidatorException.FAILURE, 
 		  e);
