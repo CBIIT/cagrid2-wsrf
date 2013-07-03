@@ -201,7 +201,7 @@ public class ProxyPathValidator {
 	throws ProxyPathValidatorException {
 
     if (logger.isDebugEnabled()) {
-    	SSLDebug.setDebug(SSLDebug.DEBUG_CERT);
+    	SSLDebug.addDebug(SSLDebug.DEBUG_CERT);
     }
 
 	if (certPath == null) {
